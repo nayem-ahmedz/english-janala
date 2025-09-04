@@ -12,10 +12,88 @@
     <!-- Daisy UI library + Tailwind CSS Framework -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- icon : fontawsome -->
+    <script src="https://kit.fontawesome.com/e54598ab59.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1 class="text-2xl">English Janala</h1>
+<body class="poppins-font">
+    <header class="bg-[rgba(186,222,255,0.26)] shadow-sm">
+        <nav class="navbar max-w-[1700px] mx-auto p-4">
+            <div class="navbar-start">
+                <a class="flex items-center gap-1 text-xl">
+                    <span class="font-semibold">English</span>
+                    <img src="assets/logo.png" alt="logo">
+                    <span class="bangla-font">জানালা</span>
+                </a>
+            </div>
+            <div class="navbar-end flex">
+                <div class="dropdown md:hidden">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-4 shadow right-0 space-y-3">
+                        <li class="font-semibold text-sm">
+                            <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-circle-question"></i> FAQ</a>
+                        </li>
+                        <li class="font-semibold text-sm">
+                            <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-book-open"></i> Learn</a>
+                        </li>
+                        <li class="font-semibold text-sm">
+                            <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="menu menu-horizontal px-1 hidden md:flex space-x-4">
+                    <li class="font-semibold text-sm">
+                        <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-circle-question"></i> FAQ</a>
+                    </li>
+                    <li class="font-semibold text-sm">
+                        <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-book-open"></i> Learn</a>
+                    </li>
+                    <li class="font-semibold text-sm">
+                        <a class="btn btn-outline btn-primary"> <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="max-w-[1700px] mx-auto p-4">
+        <section class="hero">
+            <div class="hero-content flex-col lg:flex-row-reverse max-w-full p-0">
+                <div class="grow">
+                    <img src="assets/hero-student.png" class="w-3/4 lg:w-full mx-auto" />
+                </div>
+                <div class="grow text-center lg:text-left">
+                    <h1 class="text-3xl md:text-5xl font-bold">
+                        <span class="text-[#00BCFF]">English</span> is Easy!!
+                    </h1>
+                    <p class="py-6 bangla-font max-w-3xl">
+                        আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ
+                    </p>
+                    <form class="flex flex-col gap-5 max-w-xs mx-auto lg:mx-0">
+                        <input type="text" placeholder="Enter Your Name" class="input" />
+                        <label class="input">
+                            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                                    <path
+                                        d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z">
+                                    </path>
+                                    <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                                </g>
+                            </svg>
+                            <input type="password" required placeholder="Password" minlength="8"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                        </label>
+                        <button class="btn btn-primary w-fit" disabled>Get Started</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
