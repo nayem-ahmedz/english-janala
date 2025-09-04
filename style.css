@@ -1,0 +1,13 @@
+/* tailwind intelligence help */
+@import "tailwindcss";
+
+/* classes for Poppins and Hind Siliguri Fonts */
+.poppins-font {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+.bangla-font {
+  font-family: "Hind Siliguri", sans-serif;
+  font-style: normal;
+}
+
