@@ -98,14 +98,29 @@
                 <span class="text-[#00BCFF]">Let's</span> Learn Vocabularies
             </h1>
             <div id="lessons-container" class="flex justify-center gap-5 flex-wrap"></div>
-            <article id="word-cards" class="bg-[#F8F8F8] rounded-3xl p-4 md:p-7 mt-10 text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"">
+            <section class="pt-10 flex justify-center items-center">
+                <div class="join">
+                    <div>
+                        <label class="input validator join-item">
+                            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                    stroke="currentColor">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.3-4.3"></path>
+                                </g>
+                            </svg>
+                            <input type="text" placeholder="Search words" id="search-value" required />
+                        </label>
+                    </div>
+                    <button id="search-button" class="btn btn-primary join-item">Search</button>
+                </div>
+            </section>
+            <article id="word-cards" class="bg-[#F8F8F8] rounded-3xl p-4 md:p-7 mt-10 text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 min-h-[200px]">
                 <section class="col-span-full px-3 py-8 bangla-font">
                     <p class="mb-4 text-[#79716B]">তুমি এখনও কোন Lesson Select করোনি</p>
                     <h4 class="text-2xl md:text-3xl text-[#292524]">একটি Lesson Select করো</h4>
                 </section>
             </article>
-            <!-- Open the modal using ID.showModal() method -->
-            <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
             <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box p-4 rounded-2xl">
                     <div class="border-2 border-[#EDF7FF] rounded-lg p-4 modal-contents"></div>

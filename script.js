@@ -1,11 +1,11 @@
-// fetch all lessons
+// fetch all lessons list
 function fetchLessons(){
     const url = 'https://openapi.programming-hero.com/api/levels/all';
     fetch(url)
     .then(res => res.json())
     .then(json => showLessons(json.data));
 }
-// show lessons
+// show lessons to the website
 const lessonsCont = document.getElementById('lessons-container');
 function showLessons(lessons){
     lessons.forEach(lesson => {
@@ -18,18 +18,21 @@ function showLessons(lessons){
 }
 fetchLessons();
 
-// fetch words
+// fetch words (for displaying as card)
 function fetchWordCards(levelNo){
     inactiveAllBtn(); // remove active class from all lesson buttons
     const selectedButton = document.querySelector(`.lesson-btn-${levelNo}`);
     selectedButton.classList.add('btn-active'); // adding active class to selected button
+    wordCards.innerHTML = '<span class="loading loading-dots loading-xl col-span-full mx-auto mt-12"></span>'; // show spinner/loader while fetching files
     const url = `https://openapi.programming-hero.com/api/level/${levelNo}`;
     fetch(url)
         .then(res => res.json())
         .then(json => showWordCards(json.data));
 }
+
 const wordCards = document.getElementById('word-cards');
-// show cards of words
+
+// show cards of words (display cards)
 const showWordCards = (words) => {
     wordCards.innerHTML = '';
     if(words.length <= 0){
@@ -65,6 +68,8 @@ const showWordCards = (words) => {
         wordCards.appendChild(card);
     }
 }
+
+// make all lesson button inactive
 const inactiveAllBtn = () => {
     const lessonsBtn = document.querySelectorAll('.lessons-btn');
     for(let i=0; i<lessonsBtn.length; i++){
@@ -99,18 +104,17 @@ function modalContents(word){
     document.querySelector('#my_modal_5').showModal();
 }
 
-// {
-//     "word": "Eager",
-//     "meaning": "আগ্রহী",
-//     "pronunciation": "ইগার",
-//     "level": 1,
-//     "sentence": "The kids were eager to open their gifts.",
-//     "points": 1,
-//     "partsOfSpeech": "adjective",
-//     "synonyms": [
-//         "enthusiastic",
-//         "excited",
-//         "keen"
-//     ],
-//     "id": 5
-// }
+// search functionality
+const searchInput = document.getElementById('search-value');
+document.getElementById('search-button').addEventListener('click', async () => {
+    const searchValue = searchInput.value.trim();
+    if(!searchValue){
+        alert('type something and then search!');
+        return;
+    }
+    wordCards.innerHTML = '<span class="loading loading-dots loading-xl col-span-full mx-auto mt-12"></span>'; // show spinner/loader while fetching files
+    const response = await fetch('https://openapi.programming-hero.com/api/words/all');
+    const json = await response.json();
+    const matchedWords = json.data.filter(word => word.word.includes(searchValue));
+    showWordCards(matchedWords);
+});
