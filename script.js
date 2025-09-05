@@ -12,7 +12,7 @@ function showLessons(lessons){
         const button = document.createElement('button');
         button.setAttribute('onclick', `fetchWordCards(${lesson.level_no})`);
         button.innerHTML = `<i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}`;
-        button.classList.add('btn', 'btn-outline', 'btn-primary');
+        button.classList.add('btn', 'btn-outline', 'btn-primary', 'lessons-btn', `lesson-btn-${lesson.level_no}`);
         lessonsCont.appendChild(button);
     });
 }
@@ -20,6 +20,9 @@ fetchLessons();
 
 // fetch words
 function fetchWordCards(levelNo){
+    inactiveAllBtn(); // remove active class from all lesson buttons
+    const selectedButton = document.querySelector(`.lesson-btn-${levelNo}`);
+    selectedButton.classList.add('btn-active'); // adding active class to selected button
     const url = `https://openapi.programming-hero.com/api/level/${levelNo}`;
     fetch(url)
         .then(res => res.json())
@@ -50,7 +53,7 @@ const showWordCards = (words) => {
                 "${word.meaning ? word.meaning : 'শব্দার্থ পাওয়া যায়নি'} / ${word.pronunciation ? word.pronunciation : 'উচ্চারণ পাওয়া যায়নি'}"
             </h4>
             <div class="card-actions justify-between mt-12">
-                <button class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
+                <button onclick="fetchWordDetails(${word.id})" class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
                     <i class="fa-solid fa-circle-info"></i>
                 </button>
                 <button class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
@@ -62,3 +65,52 @@ const showWordCards = (words) => {
         wordCards.appendChild(card);
     }
 }
+const inactiveAllBtn = () => {
+    const lessonsBtn = document.querySelectorAll('.lessons-btn');
+    for(let i=0; i<lessonsBtn.length; i++){
+        lessonsBtn[i].classList.remove('btn-active');
+    }
+}
+
+// fetch word details // my_modal_5.showModal()
+async function fetchWordDetails(id){
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    modalContents(json.data);
+}
+
+// display modal contents
+function modalContents(word){
+    const modalCont = document.querySelector('.modal-contents');
+    modalCont.innerHTML = `
+    <h3 class="text-3xl md:text-4xl font-bold bangla-font">${word.word} ( <i class="fa-solid fa-microphone-lines"></i> : ${word.pronunciation})</h3>
+    <h5 class="font-semibold text-2xl mt-7 mb-2">Meaning</h5>
+    <p class="bangla-font text-2xl font-medium">${word.meaning}</p>
+    <h5 class="font-semibold text-2xl mt-7 mb-2">Example</h5>
+    <p class="text-xl">${word.sentence}</p>
+    <h5 class="text-2xl font-medium bangla-font mt-7 mb-2">সমার্থক শব্দ গুলো</h5>
+    <div class="flex gap-2 flex-wrap">
+    ${
+        word.synonyms.map(syn => `<span class="bg-[#EDF7FF] py-2 px-4 rounded-lg border border-[#D7E4EF] inline-block">${syn}</span>`).join(' ')
+    }
+    </div>
+    `;
+    document.querySelector('#my_modal_5').showModal();
+}
+
+// {
+//     "word": "Eager",
+//     "meaning": "আগ্রহী",
+//     "pronunciation": "ইগার",
+//     "level": 1,
+//     "sentence": "The kids were eager to open their gifts.",
+//     "points": 1,
+//     "partsOfSpeech": "adjective",
+//     "synonyms": [
+//         "enthusiastic",
+//         "excited",
+//         "keen"
+//     ],
+//     "id": 5
+// }
