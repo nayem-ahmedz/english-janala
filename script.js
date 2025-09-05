@@ -59,7 +59,7 @@ const showWordCards = (words) => {
                 <button onclick="fetchWordDetails(${word.id})" class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
                     <i class="fa-solid fa-circle-info"></i>
                 </button>
-                <button class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
+                <button onclick="pronounceWord('${word.word}')" class="btn bg-[#1A91FF20] text-2xl h-auto p-4 opacity-85 hover:opacity-100">
                     <i class="fa-solid fa-volume-high"></i>
                 </button>
             </div>
@@ -118,3 +118,10 @@ document.getElementById('search-button').addEventListener('click', async () => {
     const matchedWords = json.data.filter(word => word.word.includes(searchValue));
     showWordCards(matchedWords);
 });
+
+// speech lound function
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-EN"; // English
+    window.speechSynthesis.speak(utterance);
+}
